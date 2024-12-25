@@ -1,0 +1,84 @@
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .card {
+    width: 300px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card-image {
+    position: relative;
+  }
+  
+  .card-image img {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  
+  .status-badge {
+    position: absolute;
+    top: 90%;
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 10px 17px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 3px;
+    border-top:5px solid white;
+    border-right:5px solid white;
+  }
+  
+  .card-content {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .author {
+    display: flex;
+    align-items: center;
+    margin-top:-15px;
+    margin-left:70px ;
+  }
+  
+  .author-image {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .card-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .card-description {
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .view-detail {
+    border-top:10px ;
+    color: black;
+    border: none;
+    padding: 8px;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-top: 1px solid grey;
+  }
+  
