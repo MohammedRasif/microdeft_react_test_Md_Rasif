@@ -1,13 +1,13 @@
 import Swal from "sweetalert2";
 import { useState } from "react";
-import axios from "axios";
+
 
 const Form = () => {
   const [formData, setFormData] = useState({
     title: "",
-    text: "",
-    instructor: "",
-    colors: "",
+    badge_text: "",
+    instructor_name: "",
+    badge_color: "",
     description: "",
   });
 
@@ -17,14 +17,29 @@ const Form = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault(); // Prevents page reload
+    console.log(formData)
     try {
-      const response = await axios.post(
-        "https://react-interview.crd4lc.easypanel.host/api/course",
-        formData
-      );
+      // const response = await axios.post(
+      //   "https://react-interview.crd4lc.easypanel.host/api/course",
+      //   {formData}
+      // );
+      const token = sessionStorage.getItem('token')
+      console.log(token)
+      const response = await fetch( `https://react-interview.crd4lc.easypanel.host/api/course`,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization:`Bearer ${token}`
+            },
+            body: JSON.stringify(formData),
+        }
+    );
+    console.log(response)
 
-      if (response.status === 201) {
+      if (response.status===200) {
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -32,6 +47,7 @@ const Form = () => {
           showConfirmButton: false,
           timer: 1500,
         });
+        console.log('success')
       }
     } catch (error) {
       console.error("Error while submitting the form:", error);
@@ -74,7 +90,7 @@ const Form = () => {
               <input
                 type="text"
                 placeholder="Instructor Name"
-                name="instructor"
+                name="instructor_name"
                 value={formData.instructor}
                 onChange={handleChange}
                 required
@@ -90,7 +106,7 @@ const Form = () => {
               <input
                 type="text"
                 placeholder="Badge Text"
-                name="text"
+                name="badge_text"
                 value={formData.text}
                 onChange={handleChange}
                 required
@@ -106,7 +122,7 @@ const Form = () => {
               <input
                 list="colors"
                 placeholder="Select or Type Color"
-                name="colors"
+                name="badge_color"
                 value={formData.colors}
                 onChange={handleChange}
                 required

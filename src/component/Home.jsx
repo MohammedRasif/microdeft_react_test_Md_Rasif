@@ -1,59 +1,52 @@
 import { useEffect, useState } from "react";
 import Form from "./Form";
 import "./style.css";
-import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const [data, setData] = useState([]);
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    localStorage.removeItem("access-token");
-    localStorage.removeItem("user-info");
-    navigate("/login");
-  };
+  const [data, setData] = useState([]); 
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "https://react-interview.crd4lc.easypanel.host/api/course"
-        );
-        const result = await response.json();
-        setData(result);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+
     fetchData();
   }, []);
+  const fetchData = async () => {
+    const token = sessionStorage.getItem('token')
+    try {
+      const response = await fetch( `https://react-interview.crd4lc.easypanel.host/api/course`,
+        {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization:`Bearer ${token}`
+            },
+            
+        }
+    );
+      const result = await response.json();
+      console.log(result.data.data)
+      console.log('hello world')
+      setData(result.data.data); 
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-green-500 via-green-400 to-green-500">
       <h1 className="text-5xl uppercase font-bold text-green-700 text-center py-5">
         Microdeft React Test Md Rasif
       </h1>
-      <div>
-        <button
-          className=" ml-[45%]  px-6 py-2 text-2xl font-semibold uppercase text-white bg-green-600 rounded-sm shadow-lg hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-red-300 transition duration-300 ease-in-out"
-          onClick={handleLogout}
-        >
-          Logout
-        </button>
-      </div>
       <div className="flex items-center">
         {/* Form Section */}
         <div className="w-1/2">
           <Form />
         </div>
-        {/* -------------------------------------- Cart Section---------------------------------- */}
+        {/* -------------------------------------- Cart Section */}
         <div className="card-container flex flex-wrap gap-4">
           {data.length > 0 ? (
             data.map((item) => (
-              <div
-                key={item._id}
-                className="card bg-white shadow-lg rounded-lg"
-              >
+              <div key={item.id} className="card bg-white shadow-lg rounded-lg">
                 <div className="card-image relative">
                   <img
                     src="https://via.placeholder.com/300x200"
@@ -62,9 +55,7 @@ const Home = () => {
                   />
                   <div
                     className={`status-badge absolute top-2 right-2 px-3 py-1 rounded-full text-white ${
-                      item.badge_color
-                        ? item.badge_color.toLowerCase()
-                        : "bg-gray-500"
+                      item.badge_color ? item.badge_color.toLowerCase() : "bg-gray-500"
                     }`}
                   >
                     {item.badge_text || "N/A"}
@@ -101,3 +92,4 @@ const Home = () => {
 };
 
 export default Home;
+
