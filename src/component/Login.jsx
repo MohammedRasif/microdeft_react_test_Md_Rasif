@@ -36,9 +36,10 @@ const Login = () => {
 
         if (response.ok) {
             localStorage.setItem("user-info", JSON.stringify(result));
-            localStorage.setItem("access-token", result.token); 
-            console.log("Token received:", result.token); 
-            navigate("/");
+            sessionStorage.setItem("token", result.data.token); 
+            localStorage.setItem('access-token', result.data.token )
+            console.log("Token received:", result.data.token);
+            navigate("/home");
         } else {
             alert(result.message || "Login failed. Please check your credentials.");
         }

@@ -31,8 +31,9 @@ const Register = () => {
 
       if (response.ok) {
         localStorage.setItem("user-info", JSON.stringify(result));
-        localStorage.setItem("access-token", result.token); // Save token
-        alert("Registration successful!");
+        sessionStorage.setItem("token", result.data.token); 
+            localStorage.setItem('access-token', result.data.token )
+            console.log("Token received:", result.data.token);
         navigate("/login");
       } else {
         alert(result.message || "Registration failed. Please try again.");

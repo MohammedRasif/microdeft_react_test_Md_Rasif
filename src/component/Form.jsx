@@ -17,7 +17,7 @@ const Form = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevents page reload
+    e.preventDefault(); 
     try {
       const response = await axios.post(
         "https://react-interview.crd4lc.easypanel.host/api/course",
