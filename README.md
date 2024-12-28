@@ -1,8 +1,14 @@
-# React + Vite
+<h1>Microdeft React Test Md Rasif</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<h2>Description</h2>
+<p>This is a web application built with React, Raw CSS and Tailwind CSS, deployed on Netlify for MICRODEFT.</p>
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<h2>Tech Stack</h2>
+<ul>
+  <li>React</li>
+  <li>Raw CSS</li>
+  <li>Tailwind CSS</li>
+  <li>Netlify</li>
+</ul>
+<h5>Live Demo</h5>
+<h4>You can check out the live version of the web here: https://jolly-biscotti-b9ec96.netlify.app/ </h4>
