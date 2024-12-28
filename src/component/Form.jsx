@@ -1,7 +1,6 @@
 import Swal from "sweetalert2";
 import { useState } from "react";
 
-
 const Form = () => {
   const [formData, setFormData] = useState({
     title: "",
@@ -17,37 +16,38 @@ const Form = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevents page reload
-    console.log(formData)
-    try {
-      // const response = await axios.post(
-      //   "https://react-interview.crd4lc.easypanel.host/api/course",
-      //   {formData}
-      // );
-      const token = sessionStorage.getItem('token')
-      console.log(token)
-      const response = await fetch( `https://react-interview.crd4lc.easypanel.host/api/course`,
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-                Authorization:`Bearer ${token}`
-            },
-            body: JSON.stringify(formData),
-        }
-    );
-    console.log(response)
+    e.preventDefault();
+    console.log(formData);
 
-      if (response.status===200) {
+    try {
+      const token = sessionStorage.getItem("token");
+      console.log("Token:", token);
+
+      const response = await fetch(
+        "https://react-interview.crd4lc.easypanel.host/api/course",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      if (response.ok) {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: `${formData.title} is added to the Contest`,
+          title: `${formData.title} has been added successfully!`,
           showConfirmButton: false,
           timer: 1500,
         });
-        console.log('success')
+        console.log("Success:", await response.json());
+      } else {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Something went wrong!");
       }
     } catch (error) {
       console.error("Error while submitting the form:", error);
@@ -55,9 +55,7 @@ const Form = () => {
         position: "top-end",
         icon: "error",
         title: "Failed to add the contest",
-        text: error.message,
-        showConfirmButton: true,
-      });
+        });
     }
   };
 
@@ -91,7 +89,7 @@ const Form = () => {
                 type="text"
                 placeholder="Instructor Name"
                 name="instructor_name"
-                value={formData.instructor}
+                value={formData.instructor_name}
                 onChange={handleChange}
                 required
                 className="w-full border-b-2 bg-transparent focus:border-green-800 border-green-600 outline-none py-2 placeholder:text-green-600"
@@ -107,7 +105,7 @@ const Form = () => {
                 type="text"
                 placeholder="Badge Text"
                 name="badge_text"
-                value={formData.text}
+                value={formData.badge_text}
                 onChange={handleChange}
                 required
                 className="w-full border-b-2 bg-transparent focus:border-green-800 border-green-600 outline-none py-2 placeholder:text-green-600"
@@ -123,7 +121,7 @@ const Form = () => {
                 list="colors"
                 placeholder="Select or Type Color"
                 name="badge_color"
-                value={formData.colors}
+                value={formData.badge_color}
                 onChange={handleChange}
                 required
                 className="w-full border-b-2 bg-transparent focus:border-green-800 border-green-600 outline-none py-2 placeholder:text-green-600"
@@ -156,7 +154,7 @@ const Form = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full btn glass bg-greeborder-green-800 border-green-600 text-white font-medium p-3 rounded-lg bg-green-600 hover:bg-green-700 focus:ring focus:ring-blue-300"
+              className="w-full btn glass border-green-600 text-white font-medium p-3 rounded-lg bg-green-600 hover:bg-green-700 focus:ring focus:ring-blue-300"
             >
               Submit
             </button>

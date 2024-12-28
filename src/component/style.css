@@ -34,31 +34,28 @@
     font-size: 12px;
     font-weight: bold;
     border-radius: 3px;
-    border-top:5px solid white;
-    border-right:5px solid white;
+    border-top: 5px solid white;
+    border-right: 5px solid white;
   }
   
+  .icon-text {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    margin-left: 100px ; 
+    margin-top: -15px;
+    padding: 2px;
+  }
+  .icon{
+    height: 17px;
+  }
   .card-content {
     padding: 15px;
     display: flex;
     flex-direction: column;
     gap: 10px;
   }
-  
-  .author {
-    display: flex;
-    align-items: center;
-    margin-top:-15px;
-    margin-left:70px ;
-  }
-  
-  .author-image {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-  
+   
   .card-title {
     font-size: 16px;
     font-weight: bold;

@@ -41,7 +41,7 @@ const Login = () => {
             console.log("Token received:", result.data.token);
             navigate("/home");
         } else {
-            alert(result.message || "Login failed. Please check your credentials.");
+            alert(result.message);
         }
     } catch (error) {
         console.error("Error logging in:", error);
